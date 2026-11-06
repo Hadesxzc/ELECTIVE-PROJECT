@@ -7,9 +7,9 @@
 
 | Name | Role |
 |------|------|
-| [Kenneth Gasmen] | Research Lead: background research, dataset documentation, written conclusion |
-| [Mark Tarayao] | Data Lead: data cleaning, exploration, and preparation |
-| [Jomer Ignacio] | Modeling Lead: model building, evaluation, and results interpretation |
+| Kenneth Gasmen | Research Lead: background research, dataset documentation, written conclusion |
+| Mark Tarayao | Data Lead: data cleaning, exploration, and preparation |
+| Jomer Ignacio | Modeling Lead: model building, evaluation, and results interpretation |
 
 **AI Usage Disclosure:** Claude was used to help structure the notebook and format the code. All written explanations, analysis, and conclusions in this report are our own work and a we use help for expounding our explanations with ai.
 
@@ -432,17 +432,17 @@ The model is useful for learning how Logistic Regression works, for exploring wh
 
 ### Q7. Individual reflections
 
-**[Member 1 - Research Lead]:**
-*(Write 3-5 sentences in your own words. What did you learn about how AI is changing the job market that surprised you? Did anything in the WEF or McKinsey research change how you thought about automation? What was the hardest part of writing the research section in a way that connected directly to this dataset?)*
+**Kenneth Gasmen - Research Lead:**
+What surprised me the most from the research was how fast the timeline actually is. I knew AI would replace jobs eventually but I did not expect the WEF to say 44% of core skills will be disrupted within five years. That felt very real. The hardest part of writing the research section was connecting the WEF and McKinsey findings to our specific dataset because our dataset does not have industry or country data, so I had to explain the gap honestly instead of pretending the research perfectly matched what we built.
 
-**[Member 2 - Data Lead]:**
-*(Write 3-5 sentences in your own words. What did you find most interesting about this dataset's structure? Why did you decide to treat Medium Risk as class 0 instead of building a three-class model? What did the visualizations show you that the raw numbers alone did not?)*
+**Mark Tarayao - Data Lead:**
+The most unexpected thing for me was how clean the dataset was. No missing values, no duplicates, everything already scaled between 0 and 1. It made cleaning easy but it also made me realize this was a very controlled synthetic dataset, not messy real data. I decided to put Medium Risk into class 0 with Low Risk because the activity asked for a yes/no prediction and High Risk felt like the clear "yes" since those are the jobs where something urgent needs to happen. Looking at the boxplots made me understand why Automation_Probability_2030 was going to dominate. The visual separation between the two classes on that one feature was obvious even before training anything.
 
-**[Member 3 - Modeling Lead]:**
-*(Write 3-5 sentences in your own words. What does it mean that one feature dominates the model so completely? Does that make the model more or less useful? What did the cross-validation results tell you about whether the model would hold up on new data?)*
+**Jomer Ignacio - Modeling Lead:**
+I was honestly surprised by how much one single feature controlled the whole model. A coefficient of +10.11 for Automation_Probability_2030 compared to -0.18 for salary means the model is basically just reading one number. That made me question whether we actually learned anything meaningful about job automation or just learned the rules of a synthetic dataset. The cross-validation helped because seeing five consistent scores with a low standard deviation told me the model was stable, not just lucky on one test split. If the standard deviation had been high, like 0.05 or more, it would mean the model was very sensitive to which rows ended up in the training set, which would be a red flag.
 
 **Hardest challenge as a group:**
-*(Write 2-3 sentences about the single hardest thing your group faced, either technically or conceptually, and how you handled it.)*
+The hardest part was when the notebook kept breaking because the column names in the actual dataset were completely different from what we assumed. We spent time debugging errors before realizing the Automation_Risk column was text values like High, Low, and Medium instead of numbers, which broke every calculation we tried to run on it. Once we figured that out and rewrote the target creation step to handle text properly, everything else fell into place.
 
 ---
 
